@@ -9,23 +9,30 @@ using namespace std;
 
 
 class graph{
+    private:
+        int V;
+        vector<int> adjlist[];
+
     public:
-        int numvertices;
-        vector<int> adjlist[5];
     // making a constructor
-        graph (int n){
-            int numpeople = n;
+        graph (int V){
+            this-> V = V;
         }
-
+        // a function to make the bidirectional edge
         void addEdge(int s, int d){
-
-            // making a bidirectional edges
             adjlist[s].push_back(d);
             adjlist[d].push_back(s);
-
         }
 };
 
 int main(){
+
+    graph g(4);
+    g.addEdge(0,1);
+    g.addEdge(1,2);
+    g.addEdge(2,3);
+    g.addEdge(0,4);
+
+
     return 0;
 }
