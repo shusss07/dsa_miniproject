@@ -45,6 +45,7 @@ int main(){
     g.addEdge(2,3);
     g.addEdge(0,4);
 
+    g.printgraph(4);
 
     return 0;
 }
