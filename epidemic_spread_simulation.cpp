@@ -84,6 +84,22 @@ class graph{
             cout<<"The first infected person in our simulation is "<<person<<endl;
 
         }
+
+        void printStates(){
+            for (int i = 0 ; i<peoples;i++){
+                cout<< i <<"\t";
+                //cout<<personstate[i];
+    
+                if(personstate[i] == Healthy){
+                    cout<<"Healthy"<<endl;}
+                else if(personstate[i] == Recovered){
+                    cout<<"Recoverd"<<endl;}
+                else if(personstate[i] == Infected){
+                    cout<<"Infected"<<endl;}
+                else {
+                    cout<< "the person is kept in quarantine"<<endl;}
+            }
+        }
 };
 
 int main(){
@@ -100,8 +116,11 @@ for (int i =0 ; i < 4 ; i++){
     g.addEdge(0,3);
 
     g.printgraph();
-    g.patientzero(0);
-    g.bfs();
 
+    // setting the person 0 as the initial infected 
+  
+    g.bfs();
+    g.patientzero(0);
+    g.printStates();
     return 0;
 }
