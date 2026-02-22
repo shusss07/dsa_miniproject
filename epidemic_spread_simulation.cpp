@@ -1,9 +1,10 @@
-// the dsa concepts we are going to use for this project is graph + BFS search + queue
+// the dsa concepts we are going to use for this project is graph + BFS search(implemented using queue)
 
 // we are going to implement graph using adjacency linked list
 
 #include<iostream>
 #include<vector>
+#include<Queue>
 
 using namespace std;
 
@@ -22,7 +23,7 @@ class graph{
         }
         // a function to make the bidirectional edge
         void addEdge(int s, int d){
-            // here s and d are two nodes where a edge exists!!
+            // here s and d are two nodes between which a edge exists!!
             adjlist[s].push_back(d);
             adjlist[d].push_back(s);
         }
@@ -38,6 +39,27 @@ class graph{
             }
         }
 
+
+        // BFS Traversal implementation using queue
+        void bfs(){
+            queue<int> Queue;
+            vector<bool> visited(peoples,false);
+
+            Queue.push(0);
+            visited[0] = true;
+
+            while(Queue.size()>0){
+                int s = Queue.front();
+                Queue.pop();
+                cout<<s<<" ";
+                for (int d : adjlist[s]){
+                if(!visited[d]){
+                    visited[d]= true;
+                    Queue.push(d);
+                }
+            }
+            }
+        }
 };
 
 int main(){
@@ -47,8 +69,6 @@ int main(){
     g.addEdge(1,2);
     g.addEdge(2,3);
     g.addEdge(0,4);
-
-    g.printgraph();
 
     return 0;
 }
