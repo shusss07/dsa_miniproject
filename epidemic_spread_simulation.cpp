@@ -1,14 +1,15 @@
 // the dsa concepts we are going to use for this project is graph + BFS search + queue
 
+// we are going to implement graph using adjacency linked list
+
 #include<iostream>
 #include<vector>
 
 using namespace std;
-// LETS first create a graph:
 
 const int MAX_PEPS = 50;
 
-
+// LETS first create a graph:
 class graph{
     private:
         int peoples;
@@ -21,6 +22,7 @@ class graph{
         }
         // a function to make the bidirectional edge
         void addEdge(int s, int d){
+            // here s and d are two nodes where a edge exists!!
             adjlist[s].push_back(d);
             adjlist[d].push_back(s);
         }
