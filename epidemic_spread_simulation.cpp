@@ -23,7 +23,19 @@ class graph{
             adjlist[s].push_back(d);
             adjlist[d].push_back(s);
         }
-};
+
+        // a function to print the graph:
+        void printgraph(int V){
+        for(int i=0; i<V ; i++){
+            cout<<"Vertex :"<<i;
+            for (int no : adjlist[i]){
+                cout<< no << ",";
+                 }
+            cout<<endl;     
+            }
+        }
+
+    };
 
 int main(){
 
