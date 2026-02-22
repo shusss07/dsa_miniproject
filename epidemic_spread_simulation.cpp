@@ -6,17 +6,18 @@
 using namespace std;
 // LETS first create a graph:
 
+const int MAX_PEPS = 50;
 
 
 class graph{
     private:
-        int V;
-        vector<int> adjlist[];
+        int peoples;
+        vector<int> adjlist[MAX_PEPS];
 
     public:
     // making a constructor
-        graph (int V){
-            this-> V = V;
+        graph (int n){
+            peoples = n;
         }
         // a function to make the bidirectional edge
         void addEdge(int s, int d){
@@ -25,9 +26,9 @@ class graph{
         }
 
         // a function to print the graph:
-        void printgraph(int V){
-        for(int i=0; i<V ; i++){
-            cout<<"Vertex :"<<i;
+        void printgraph(){
+        for(int i=0; i < peoples ; i++){
+            cout<<"Vertex :"<<i<<"\t";
             for (int no : adjlist[i]){
                 cout<< no << ",";
                  }
@@ -35,7 +36,7 @@ class graph{
             }
         }
 
-    };
+};
 
 int main(){
 
@@ -45,7 +46,7 @@ int main(){
     g.addEdge(2,3);
     g.addEdge(0,4);
 
-    g.printgraph(4);
+    g.printgraph();
 
     return 0;
 }
