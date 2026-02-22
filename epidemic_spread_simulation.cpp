@@ -16,6 +16,9 @@ enum State{
     Quarantine,
 };
 
+
+State personstate[MAX_PEPS];
+
 // LETS first create a graph:
 class graph{
     private:
@@ -71,9 +74,24 @@ class graph{
             }
             }
         }
+
+        // Setting patients zero; first person to get infected in the peoples
+        
+        // starting node for our bfs
+        void patientzero(int person){
+
+            personstate[person] = Infected;
+            cout<<"The first infected person in our simulation is "<<person<<endl;
+
+        }
 };
 
 int main(){
+
+    // at first everyone is healthy
+for (int i =0 ; i < 4 ; i++){
+    personstate[i] = Healthy;
+}
 
     graph g(4);
     g.addEdge(0,1);
@@ -82,6 +100,7 @@ int main(){
     g.addEdge(0,3);
 
     g.printgraph();
+    g.patientzero(0);
     g.bfs();
 
     return 0;
