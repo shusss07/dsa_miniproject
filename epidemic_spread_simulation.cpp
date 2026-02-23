@@ -71,7 +71,8 @@ class graph{
             while(Queue.size()!=0){
                 cout<<"Day :"<<day<<endl;
 
-                int level = day;
+                // bug fixed; level shou;d be how many peps are there in queue not what day it is
+                int level = Queue.size();
 
                 for (int j =0 ; j< level ; j++){
                 int source = Queue.front();
@@ -151,12 +152,13 @@ class graph{
 
 int main(){
 
+    int n =30;
     // at first everyone is healthy
-for (int i =0 ; i < 4 ; i++){
+for (int i =0 ; i < n ; i++){
     personstate[i] = Healthy;
 }
 
-    graph g(30);
+    graph g(n);
 
     // for generating edges
     g.generateEdge(42);
