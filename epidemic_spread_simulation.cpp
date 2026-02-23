@@ -49,30 +49,54 @@ class graph{
         }
 
 
-        // BFS Traversal implementation using queue
-        void bfs(){
-            // we are using queue to store our source node and then pop it;
-            queue<int> Queue;
-            // then we are using a vector of booleans to check whether the people/vertex is already visited or not
-            vector<bool> visited(peoples,false);
-            // pushing our first element/ first source to the queue
-            Queue.push(0);
-            visited[0] = true;
+        // BFS spread  implementation using queue
+        void bfs_spread(){
 
-            while(Queue.size()>0){
-                int s = Queue.front();
-                Queue.pop();
-                // printing the source of the graph
-                cout<<s<<" ";
-                for (int d : adjlist[s]){
-                if(!visited[d]){
-                    // changing the bool value to true
-                    visited[d]= true;
-                    // added our destination node to the queue to make it a new source
-                    Queue.push(d);
+            queue<int> Queue;
+
+            // finding the patient zero
+            for(int i =0 ; i<peoples ; i++){
+
+                if (personstate[i]== Infected){
+                    Queue.push(i);
                 }
             }
+
+
+           // vector<bool> visited(peoples,false); -- this is no longer needed as this is done by our states
+
+            // adding the day counter since my model has become infect everyone script:
+            int day = 0;
+
+            while(Queue.size()!=0){
+                cout<<"Day :"<<day<<endl;
+
+                int level = day;
+
+                for (int j =0 ; j< level ; j++){
+                int source = Queue.front();
+                Queue.pop();
+
+
+                for (int neighbor : adjlist[source]){
+
+                if(personstate[neighbor] == Healthy ){
+
+                    personstate[neighbor] = Infected;
+                    // added our destination node to the queue to make it a new source
+                    Queue.push(neighbor);
+
+                    }
+
+                }
+                personstate[source] = Recovered;
+
+                }
+                printStates();
+                day++;
             }
+            
+
         }
 
         // Setting patients zero; first person to get infected in the peoples
@@ -119,8 +143,10 @@ for (int i =0 ; i < 4 ; i++){
 
     // setting the person 0 as the initial infected 
   
-    g.bfs();
     g.patientzero(0);
     g.printStates();
+
+    g.bfs_spread();
+
     return 0;
 }
