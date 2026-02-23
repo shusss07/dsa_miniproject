@@ -16,6 +16,14 @@ enum State{
     Quarantine,
 };
 
+string getSymbol(int i){
+    if(personstate[i] == Healthy) return "[H]";
+    if(personstate[i] == Infected) return "[I]";
+    if(personstate[i] == Recovered) return "[R]";
+    if(personstate[i] == Quarantine) return "[Q]";
+
+}
+
 
 State personstate[MAX_PEPS];
 
