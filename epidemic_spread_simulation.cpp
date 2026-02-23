@@ -125,6 +125,12 @@ class graph{
             }
         }
 
+        void quarantine(int person){
+            cout<<"the infected person that got quarantine is " <<person;
+            personstate[person] = Quarantine;
+            adjlist[person].clear();
+        }
+
         void generateEdge(int seed){
 
             srand(seed); // for checking bugs
@@ -158,6 +164,8 @@ for (int i =0 ; i < 4 ; i++){
     // setting the person 0 as the initial infected 
   
     g.patientzero(0);
+
+    g.quarantine(2);
     g.printStates();
 
     g.bfs_spread();
