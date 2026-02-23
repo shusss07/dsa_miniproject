@@ -127,12 +127,14 @@ class graph{
 
         void generateEdge(int seed){
 
-
-            int contacts = 2 + rand() % 4; // value of contacts will be between 2 and 5
-            for (int i=0 ; i<contacts ; i++){
-                    for(int j ){
-                        
-
+            srand(seed); // for checking bugs
+            for (int i=0 ; i<peoples ; i++){
+                int contacts = 2 + rand() % 4; // value of contacts will be between 2 and 5
+                for(int j=0 ; j< contacts; j++ ){
+                int connections = rand() % peoples;
+                    if(connections != i ){// to avoid self loops
+                        addEdge(connections,i);
+                    }
                     }
 
             }
@@ -147,11 +149,9 @@ for (int i =0 ; i < 4 ; i++){
     personstate[i] = Healthy;
 }
 
-    graph g(4);
-    g.addEdge(0,1);
-    g.addEdge(1,2);
-    g.addEdge(2,3);
-    g.addEdge(0,3);
+    graph g(30);
+
+    g.generateEdge(42);
 
     g.printgraph();
 
