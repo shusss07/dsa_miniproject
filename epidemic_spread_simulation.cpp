@@ -16,12 +16,26 @@ enum State{
     Quarantine,
 };
 
+
+// for getting the symbol in output;
 string getSymbol(int i){
     if(personstate[i] == Healthy) return "[H]";
     if(personstate[i] == Infected) return "[I]";
     if(personstate[i] == Recovered) return "[R]";
     if(personstate[i] == Quarantine) return "[Q]";
 
+}
+
+// for counting total no of people in each state;
+int countState(int n , State s){
+
+    int count = 0 ;
+    for (int i = 0 ; i < n ; i++){
+
+        if(personstate[i] == s)  count++ ;
+        
+    return count ;
+    }
 }
 
 
