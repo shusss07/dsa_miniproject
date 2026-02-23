@@ -16,6 +16,7 @@ enum State{
     Quarantine,
 };
 
+State personstate[MAX_PEPS];
 
 // for getting the symbol in output;
 string getSymbol(int i){
@@ -38,8 +39,6 @@ int countState(int n , State s){
     }
 }
 
-
-State personstate[MAX_PEPS];
 
 // LETS first create a graph:
 class graph{
