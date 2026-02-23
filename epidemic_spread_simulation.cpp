@@ -127,19 +127,20 @@ class graph{
 
         void quarantine(int person){
             cout<<"the infected person that got quarantine is " <<person;
-            personstate[person] = Quarantine;
-            adjlist[person].clear();
+            personstate[person] = Quarantine; // chaining the state
+            adjlist[person].clear(); // clearing the connection/edges so the disease doesnot spread 
+            // ie. deleting the node for person 2
         }
 
         void generateEdge(int seed){
 
-            srand(seed); // for checking bugs
+            srand(seed); // for getting same sequence -- easier to debug
             for (int i=0 ; i<peoples ; i++){
                 int contacts = 2 + rand() % 4; // value of contacts will be between 2 and 5
                 for(int j=0 ; j< contacts; j++ ){
                 int connections = rand() % peoples;
                     if(connections != i ){// to avoid self loops
-                        addEdge(connections,i);
+                        addEdge(connections,i); // adding edges between 2 nodes
                     }
                     }
 
@@ -157,17 +158,25 @@ for (int i =0 ; i < 4 ; i++){
 
     graph g(30);
 
+    // for generating edges
     g.generateEdge(42);
 
+    // printing the graph to see the connections
     g.printgraph();
 
     // setting the person 0 as the initial infected 
-  
     g.patientzero(0);
 
+    // also setting person 2 as infected
+    g.patientzero(2);
+
+    // keeping no 2 in quarantine
     g.quarantine(2);
+
+    // printing the states of people
     g.printStates();
 
+    // visualizing the spread
     g.bfs_spread();
 
     return 0;
