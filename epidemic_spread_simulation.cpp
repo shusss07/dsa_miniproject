@@ -124,6 +124,20 @@ class graph{
                     cout<< "the person is kept in quarantine"<<endl;}
             }
         }
+
+        void generateEdge(int seed){
+
+
+            int contacts = 2 + rand() % 4; // value of contacts will be between 2 and 5
+            for (int i=0 ; i<contacts ; i++){
+                    for(int j ){
+                        
+
+                    }
+
+            }
+
+        }
 };
 
 int main(){
