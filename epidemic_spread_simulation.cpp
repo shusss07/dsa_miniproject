@@ -178,6 +178,7 @@ class graph{
 
         }
 
+        // euta line ma 10 jana lai dekhauna ko lagi /// aestheticss
         void printGrid(){
             cout << "  H=Healthy  [I]=Infected  R=Recovered  [Q]=Quarantined\n\n";
             int cols = 10;
@@ -190,6 +191,8 @@ class graph{
             cout << "\n";
         }
 
+
+        // prints each day summary
         void printDaySummary(int day){
             int h   = countState(peoples, Healthy);
             int inf = countState(peoples, Infected);
@@ -207,6 +210,8 @@ class graph{
         }
 
 
+
+        // end ma k vayo dekauna lai
         void printFinalStats(int totalDays, int totalInfected){
             int h = countState(peoples, Healthy);
             int r = countState(peoples, Recovered);
