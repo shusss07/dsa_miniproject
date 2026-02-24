@@ -4,6 +4,7 @@
 #include<vector>
 #include<queue>
 #include<string>
+#include<iomanip> // to align text in columns
 
 using namespace std;
 
@@ -24,19 +25,21 @@ string getSymbol(int i){
     if(personstate[i] == Infected) return "[I]";
     if(personstate[i] == Recovered) return "[R]";
     if(personstate[i] == Quarantine) return "[Q]";
+    return "HELlo";
 
 }
 
 // for counting total no of people in each state;
 int countState(int n , State s){
-
     int count = 0 ;
     for (int i = 0 ; i < n ; i++){
 
-        if(personstate[i] == s)  count++ ;
-        
-    return count ;
+        if(personstate[i] == s) {
+        count++ ;
+        }
     }
+    return count ;
+
 }
 
 
@@ -88,6 +91,7 @@ class graph{
 
             // adding the day counter since my model has become infect everyone script:
             int day = 0;
+            int totalInfected = countState(peoples, Infected) + countState(peoples, Quarantine);
 
             while(Queue.size()!=0){
                 cout<<"Day :"<<day<<endl;
@@ -107,16 +111,20 @@ class graph{
                     personstate[neighbor] = Infected;
                     // added our destination node to the queue to make it a new source
                     Queue.push(neighbor);
+                    totalInfected++;
+
 
                     }
 
                 }
                 personstate[source] = Recovered;
-
                 }
-                printStates();
-                day++;
+                    printGrid();
+                    printDaySummary(day);         
+             day++;
             }
+            printFinalStats(day, totalInfected);
+
             
 
         }
@@ -158,7 +166,7 @@ class graph{
 
             srand(seed); // for getting same sequence -- easier to debug
             for (int i=0 ; i<peoples ; i++){
-                int contacts = 2 + rand() % 4; // value of contacts will be between 2 and 5
+                int contacts = 2 + rand() % 2; // value of contacts will be between 2 and 5
                 for(int j=0 ; j< contacts; j++ ){
                 int connections = rand() % peoples;
                     if(connections != i ){// to avoid self loops
@@ -169,6 +177,53 @@ class graph{
             }
 
         }
+
+        void printGrid(){
+            cout << "  H=Healthy  [I]=Infected  R=Recovered  [Q]=Quarantined\n\n";
+            int cols = 10;
+            for(int i = 0; i < peoples; i++){
+                if(i % cols == 0) cout << "  ";
+                cout << setw(2) << i << ":" << getSymbol(i) << "  ";
+                if((i + 1) % cols == 0) cout << "\n";
+            }
+            if(peoples % cols != 0) cout << "\n";
+            cout << "\n";
+        }
+
+        void printDaySummary(int day){
+            int h   = countState(peoples, Healthy);
+            int inf = countState(peoples, Infected);
+            int r   = countState(peoples, Recovered);
+            int q   = countState(peoples, Quarantine);
+
+            cout<<"\n\n"<<endl;
+            cout << "  Day " << day << " Summary  (Total: " << peoples << " people)\n";
+            cout<<"\n\n"<<endl;
+            cout << "  [H] Healthy    : " << h   << " people\n";
+            cout << "  [I] Infected   : " << inf << " people\n";
+            cout << "  [R] Recovered  : " << r   << " people\n";
+            cout << "  [Q] Quarantine : " << q   << " people\n";
+            cout<<"\n\n";
+        }
+
+
+        void printFinalStats(int totalDays, int totalInfected){
+            int h = countState(peoples, Healthy);
+            int r = countState(peoples, Recovered);
+            int q = countState(peoples, Quarantine);
+
+            cout << "\n";
+            cout<<"\n\n"<<endl;
+            cout << "              SIMULATION COMPLETE\n";
+            cout<<"\n\n"<<endl;
+            cout << "  Total Days Taken     : " << totalDays     << "\n";
+            cout << "  Total Ever Infected  : " << totalInfected << "\n";
+            cout << "  Never Infected (safe): " << h             << "\n";
+            cout << "  Recovered            : " << r             << "\n";
+            cout << "  Quarantined          : " << q             << "\n";
+            cout<<"\n\n"<<endl;
+        }
+
 };
 
 int main(){
