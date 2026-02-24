@@ -1,5 +1,6 @@
 // the dsa concepts we are going to use for this project is graph + BFS search(implemented using queue)
-// we are going to implement graph using adjacency linked list
+// hami chai graph implement garna adjacency linked list use garne!!
+
 #include<iostream>
 #include<vector>
 #include<queue>
@@ -112,7 +113,6 @@ class graph{
                     // added our destination node to the queue to make it a new source
                     Queue.push(neighbor);
                     totalInfected++;
-
 
                     }
 
